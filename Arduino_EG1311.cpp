@@ -13,10 +13,10 @@ int MOTOR4_PIN2 = 11;
 int SERVO_PIN = 3;
 
 const float SPEED_OF_SOUND = 0.0343;
-const int threshold = 12;
+const int threshold = 8;
 
-const int SERVO_START = 10;
-const int SERVO_THROW = 160;
+const int SERVO_START = 100;
+const int SERVO_THROW = 0;
 
 const int REVERSE_TIME = 20000; // milliseconds
 
@@ -51,6 +51,8 @@ void setup() {
   Serial.begin(9600);
 
   Serial.println("Robot starting...");
+
+  delay(3000);
 }
 
 void reverse() {
@@ -90,7 +92,7 @@ void throwBall() {
 
   stopMotors();
 
-  for (int angle = SERVO_START; angle <= SERVO_THROW; angle++) {
+  for (int angle = SERVO_START; angle >= SERVO_THROW; angle--) {
     servo.write(angle);
     delay(10);
   }
@@ -131,11 +133,13 @@ void loop() {
   float distance = readDistance();
 
   Serial.print("Distance: ");
-  Serial.println(distance);
+  Serial.print(distance);
+  Serial.print(", State: ");
 
   switch (state) {
 
     case MOVING_FORWARD:
+      Serial.println("Forward");
 
       forward();
       if (distance <= threshold) {
@@ -144,6 +148,7 @@ void loop() {
       break;
 
     case THROWING_BALL:
+      Serial.println("Throwing");
 
       Serial.println("Wall reached. Throwing ball.");
       throwBall();
@@ -152,6 +157,7 @@ void loop() {
       break;
 
     case REVERSING:
+      Serial.println("Reversing");
 
       reverse();
       if (millis() - reverseStartTime >= REVERSE_TIME) {
@@ -161,6 +167,7 @@ void loop() {
       break;
 
     case STOPPED:
+      Serial.println("Stopped");
       stopMotors();
       break;
   }
