@@ -2,18 +2,12 @@
 
 int TRIG_PIN = 13;
 int ECHO_PIN = 12;
-int MOTOR1_PIN1 = 4;
-int MOTOR1_PIN2 = 5;
-int MOTOR2_PIN1 = 6;
-int MOTOR2_PIN2 = 7;
-int MOTOR3_PIN1 = 8;
-int MOTOR3_PIN2 = 9;
-int MOTOR4_PIN1 = 10;
-int MOTOR4_PIN2 = 11;
+int MOTOR_PIN1 = 4;
+int MOTOR_PIN2 = 5;
 int SERVO_PIN = 3;
 
 const float SPEED_OF_SOUND = 0.0343;
-const int threshold = 8;
+const int threshold = 15;
 
 const int SERVO_START = 100;
 const int SERVO_THROW = 0;
@@ -33,14 +27,8 @@ RobotState state = MOVING_FORWARD;
 unsigned long reverseStartTime = 0;
 
 void setup() {
-  pinMode(MOTOR1_PIN1, OUTPUT);
-  pinMode(MOTOR1_PIN2, OUTPUT);
-  pinMode(MOTOR2_PIN1, OUTPUT);
-  pinMode(MOTOR2_PIN2, OUTPUT);
-  pinMode(MOTOR3_PIN1, OUTPUT);
-  pinMode(MOTOR3_PIN2, OUTPUT);
-  pinMode(MOTOR4_PIN1, OUTPUT);
-  pinMode(MOTOR4_PIN2, OUTPUT);
+  pinMode(MOTOR_PIN1, OUTPUT);
+  pinMode(MOTOR_PIN2, OUTPUT);
 
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
@@ -56,36 +44,18 @@ void setup() {
 }
 
 void reverse() {
-  digitalWrite(MOTOR1_PIN1, HIGH);
-  digitalWrite(MOTOR1_PIN2, LOW);
-  digitalWrite(MOTOR2_PIN1, HIGH);
-  digitalWrite(MOTOR2_PIN2, LOW);
-  digitalWrite(MOTOR3_PIN1, HIGH);
-  digitalWrite(MOTOR3_PIN2, LOW);
-  digitalWrite(MOTOR4_PIN1, HIGH);
-  digitalWrite(MOTOR4_PIN2, LOW);
+  digitalWrite(MOTOR_PIN1, HIGH);
+  digitalWrite(MOTOR_PIN2, LOW);
 }
 
 void forward() {
-  digitalWrite(MOTOR1_PIN1, LOW);
-  digitalWrite(MOTOR1_PIN2, HIGH);
-  digitalWrite(MOTOR2_PIN1, LOW);
-  digitalWrite(MOTOR2_PIN2, HIGH);
-  digitalWrite(MOTOR3_PIN1, LOW);
-  digitalWrite(MOTOR3_PIN2, HIGH);
-  digitalWrite(MOTOR4_PIN1, LOW);
-  digitalWrite(MOTOR4_PIN2, HIGH);
+  digitalWrite(MOTOR_PIN1, LOW);
+  digitalWrite(MOTOR_PIN2, HIGH);
 }
 
 void stopMotors() {
-  digitalWrite(MOTOR1_PIN1, LOW);
-  digitalWrite(MOTOR1_PIN2, LOW);
-  digitalWrite(MOTOR2_PIN1, LOW);
-  digitalWrite(MOTOR2_PIN2, LOW);
-  digitalWrite(MOTOR3_PIN1, LOW);
-  digitalWrite(MOTOR3_PIN2, LOW);
-  digitalWrite(MOTOR4_PIN1, LOW);
-  digitalWrite(MOTOR4_PIN2, LOW);
+  digitalWrite(MOTOR_PIN1, LOW);
+  digitalWrite(MOTOR_PIN2, LOW);
 }
 
 void throwBall() {
