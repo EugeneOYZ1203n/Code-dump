@@ -7,11 +7,12 @@ int MOTOR_PIN2 = 5;
 int SERVO_PIN = 3;
 
 const float SPEED_OF_SOUND = 0.0343;
-const int threshold = 15;
+const int threshold = 10;
 
-const int SERVO_START = 100;
+const int SERVO_START = 180;
 const int SERVO_THROW = 0;
 
+const int START_DELAY = 50; //milliseconds
 const int REVERSE_TIME = 20000; // milliseconds
 
 Servo servo;
@@ -40,7 +41,7 @@ void setup() {
 
   Serial.println("Robot starting...");
 
-  delay(3000);
+  delay(START_DELAY);
 }
 
 void reverse() {
@@ -62,9 +63,9 @@ void throwBall() {
 
   stopMotors();
 
-  for (int angle = SERVO_START; angle >= SERVO_THROW; angle--) {
+  for (int angle = SERVO_START; angle >= SERVO_THROW; angle = angle - 10) {
     servo.write(angle);
-    delay(10);
+    delay(5);
   }
 
   delay(50);
