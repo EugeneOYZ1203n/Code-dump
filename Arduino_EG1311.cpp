@@ -2,8 +2,10 @@
 
 int TRIG_PIN = 13;
 int ECHO_PIN = 12;
-int MOTOR_PIN1 = 4;
-int MOTOR_PIN2 = 5;
+int MOTOR1_PIN1 = 2;
+int MOTOR1_PIN2 = 7;
+int MOTOR2_PIN1 = 8;
+int MOTOR2_PIN2 = 4;
 int SERVO_PIN = 3;
 
 const float SPEED_OF_SOUND = 0.0343;
@@ -28,8 +30,10 @@ RobotState state = MOVING_FORWARD;
 unsigned long reverseStartTime = 0;
 
 void setup() {
-  pinMode(MOTOR_PIN1, OUTPUT);
-  pinMode(MOTOR_PIN2, OUTPUT);
+  pinMode(MOTOR1_PIN1, OUTPUT);
+  pinMode(MOTOR1_PIN2, OUTPUT);
+  pinMode(MOTOR2_PIN1, OUTPUT);
+  pinMode(MOTOR2_PIN2, OUTPUT);
 
   pinMode(TRIG_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
@@ -45,18 +49,24 @@ void setup() {
 }
 
 void reverse() {
-  digitalWrite(MOTOR_PIN1, HIGH);
-  digitalWrite(MOTOR_PIN2, LOW);
+  digitalWrite(MOTOR1_PIN1, HIGH);
+  digitalWrite(MOTOR1_PIN2, LOW);
+  digitalWrite(MOTOR2_PIN1, HIGH);
+  digitalWrite(MOTOR2_PIN2, LOW);
 }
 
 void forward() {
-  digitalWrite(MOTOR_PIN1, LOW);
-  digitalWrite(MOTOR_PIN2, HIGH);
+  digitalWrite(MOTOR1_PIN1, LOW);
+  digitalWrite(MOTOR1_PIN2, HIGH);
+  digitalWrite(MOTOR2_PIN1, LOW);
+  digitalWrite(MOTOR2_PIN2, HIGH);
 }
 
 void stopMotors() {
-  digitalWrite(MOTOR_PIN1, LOW);
-  digitalWrite(MOTOR_PIN2, LOW);
+  digitalWrite(MOTOR1_PIN1, LOW);
+  digitalWrite(MOTOR1_PIN2, LOW);
+  digitalWrite(MOTOR2_PIN1, LOW);
+  digitalWrite(MOTOR2_PIN2, LOW);
 }
 
 void throwBall() {
