@@ -31,8 +31,6 @@ RobotState state = MOVING_FORWARD;
 unsigned long reverseStartTime = 0;
 unsigned long programStartTime = 0;
 
-int consecutiveBelowThreshold = 0;  // count of consecutive readings below threshold
-
 void setup() {
   pinMode(MOTOR1_PIN1, OUTPUT);
   pinMode(MOTOR1_PIN2, OUTPUT);
@@ -128,14 +126,7 @@ void loop() {
       // Only allow throwing if 3 seconds have passed
       if (millis() - programStartTime >= THROW_DELAY) {
         if (distance <= threshold) {
-          consecutiveBelowThreshold++;
-        } else {
-          consecutiveBelowThreshold = 0; // reset if reading is above threshold
-        }
-
-        if (consecutiveBelowThreshold >= 2) { // need 2 consecutive readings below threshold
-          state = THROWING_BALL;
-          consecutiveBelowThreshold = 0; // reset counter
+          state = THROWING_BALL;  
         }
       }
       break;
